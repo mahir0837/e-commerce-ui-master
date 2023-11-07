@@ -1,0 +1,147 @@
+.space-buttons{
+    flex: 1 1 auto;
+}
+
+.ci-sign-in:before {
+    content: "\e99e";
+  }
+  
+  .ci-sign-out:before {
+    content: "\e99f";
+  }
+ 
+  
+ 
+ 
+  .form-floating > .form-control,
+  .form-floating > .form-control-plaintext {
+    padding: 1rem 1rem;
+  }
+  .form-floating > .form-control::-moz-placeholder, .form-floating > .form-control-plaintext::-moz-placeholder {
+    color: transparent;
+  }
+  .form-floating > .form-control::placeholder,
+  .form-floating > .form-control-plaintext::placeholder {
+    color: transparent;
+  }
+  .form-floating > .form-control:not(:-moz-placeholder-shown), .form-floating > .form-control-plaintext:not(:-moz-placeholder-shown) {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+  }
+  .form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown),
+  .form-floating > .form-control-plaintext:focus,
+  .form-floating > .form-control-plaintext:not(:placeholder-shown) {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+  }
+  .form-floating > .form-control:-webkit-autofill,
+  .form-floating > .form-control-plaintext:-webkit-autofill {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+  }
+  .form-floating > .form-select {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+  }
+  .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  }
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label,
+  .form-floating > .form-control-plaintext ~ label,
+  .form-floating > .form-select ~ label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  }
+  .form-floating > .form-control:-webkit-autofill ~ label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  }
+  .form-floating > .form-control-plaintext ~ label {
+    border-width: 1px 0;
+  }
+  
+  .input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+  }
+  .input-group > .form-control,
+  .input-group > .form-select,
+  .input-group > .form-floating {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+  }
+  .input-group > .form-control:focus,
+  .input-group > .form-select:focus,
+  .input-group > .form-floating:focus-within {
+    z-index: 5;
+  }
+  .input-group .btn {
+    position: relative;
+    z-index: 2;
+  }
+  .input-group .btn:focus {
+    z-index: 5;
+  }
+  
+  .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4b566b;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #fff;
+    border: 1px solid #dae1e7;
+    border-radius: 0.3125rem;
+  }
+  
+ 
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+.btn-close {
+    box-sizing: content-box;
+    width: 0.75rem;
+    height: 0.75rem;
+    padding: 0.25rem 0.25rem;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/0.75rem auto no-repeat;
+    border: 0;
+    border-radius: 0.3125rem;
+    opacity: 0.5;
+  }
+  .bg-secondary {
+    --cz-bg-opacity: 1;
+    background-color: #f6f9fc !important;
+  }
+  body {
+    margin: 0;
+    font-family: var(--cz-body-font-family);
+    font-size: var(--cz-body-font-size);
+    font-weight: var(--cz-body-font-weight);
+    line-height: var(--cz-body-line-height);
+    color: var(--cz-body-color);
+    text-align: var(--cz-body-text-align);
+    background-color: var(--cz-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  ::selection {
+    background: rgba(78, 84, 200, 0.15);
+  }
+  

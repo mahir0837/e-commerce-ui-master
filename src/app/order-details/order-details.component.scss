@@ -1,0 +1,25 @@
+add-days-cell {
+  display: flex;
+  align-items: center;
+}
+
+.add-days-input {
+  width: 40px;
+  text-align: center;
+  margin-right: 8px;
+}
+
+.add-days-button {
+  width: 30px;
+  height: 30px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.add-days-button:hover {
+  background-color: #0056b3;
+}

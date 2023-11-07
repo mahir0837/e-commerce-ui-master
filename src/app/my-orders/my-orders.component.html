@@ -1,0 +1,212 @@
+<!-- <div class="container mt-5">
+  <div class="card">
+      <table mat-table [dataSource]="myOrderDetails" class="mat-elevation-z8">
+          <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.orderFullName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Address">
+              <th mat-header-cell *matHeaderCellDef> Address </th>
+              <td mat-cell *matCellDef="let element"> {{element.orderFullAddress}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Contact No">
+              <th mat-header-cell *matHeaderCellDef> Contact No </th>
+              <td mat-cell *matCellDef="let element"> {{element.orderContactNumber}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Amount">
+              <th mat-header-cell *matHeaderCellDef> Amount </th>
+              <td mat-cell *matCellDef="let element"> {{element.orderAmount}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+            </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  </div>
+</div> -->
+
+
+  <body class="handheld-toolbar-enabled">
+    <main class="page-wrapper">
+      <!-- Order Details Modal-->
+      <div class="modal fade" id="order-details">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Order No - 34VB5540K83</h5>
+              <button
+                class="btn-close"
+                type="button"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body pb-0">
+              <!-- Item-->
+              <div
+                class="d-sm-flex justify-content-between mb-4 pb-3 pb-sm-2 border-bottom"
+                *ngFor="let item of myOrderDetails"
+                >
+                <div class="d-sm-flex text-center text-sm-start">
+                  <a
+                    class="d-inline-block flex-shrink-0 mx-auto"
+                    href="shop-single-v1.html"
+                    style="width: 5rem"
+                    ><img  [src]="item.product.productImages[0].url" alt="Product"
+                  /></a>
+                  <div class="ps-sm-4 pt-2">
+                    <h3 class="product-title fs-base mb-2">
+                      <a href="shop-single-v1.html"
+                        >{{item.product.productName}}</a
+                      >
+                    </h3>
+                  
+                   
+                    <div class="fs-lg text-accent pt-2">
+                      ${{item.product.productDiscountedPrice}}.<small>00</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
+                  <div class="text-muted mb-2">Status:</div>
+                  {{item.orderStatus}}
+                </div>
+                <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
+                  <div class="text-muted mb-2">Subtotal</div>
+                  ${{ item.orderAmount | number: '1.2-2' }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container my-5">
+        <div class="card border-0 shadow" *ngFor="let item of myOrderDetails">
+          <div class="card-header bg-dark text-light" >
+            <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+              <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+                <nav aria-label="breadcrumb"></nav>
+              </div>
+              <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+                <h1 class="h3 mb-0">
+                  Tracking order:
+                  <span class="h4 fw-normal">{{item.trackingNumber}}</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row gx-4 mb-4">
+              <div class="col-md-4 mb-2">
+                <div class="card bg-secondary h-100 text-white rounded-3">
+                  <div class="card-body p-4 text-center">
+                    <span class="fw-medium">Product Name:</span>
+                    {{ item.product.productName }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-2">
+                <div class="card bg-secondary h-100 text-white rounded-3">
+                  <div class="card-body p-4 text-center">
+                    <span class="fw-medium">Status:</span>{{ item.orderStatus }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-2">
+                <div class="card bg-secondary h-100 text-white rounded-3">
+                  <div class="card-body p-4 text-center">
+                    <span class="fw-medium">Expected date: {{item.orderDate}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card border-0 shadow-lg">
+              <div class="card-body pb-2">
+                <ul class="nav nav-tabs media-tabs nav-justified">
+                  <li class="nav-item">
+                    <div class="nav-link active" >
+                      <div class="d-flex align-items-center" >
+                        <div class="media-tab-media" *ngIf="item.orderStatus === 'Placed'">
+                          <i class="ci-bag"></i>
+                        </div>
+                        <div class="ps-3">
+                          <div class="media-tab-subtitle text-muted fs-xs mb-1"  style="font-weight: bolder;">
+                            First step
+                          </div>
+                          <h6 class="media-tab-title text-nowrap mb-0" style="font-size: 15px;">
+                            Order placed
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item" >
+                    <div class="nav-link active">
+                      <div class="d-flex align-items-center">
+                        <div class="media-tab-media" *ngIf="item.orderStatus === 'Processing'">
+                          <i class="ci-settings"></i>
+                        </div>
+                        <div class="ps-3">
+                          <div class="media-tab-subtitle text-muted fs-xs mb-1" style="font-weight: bolder;">
+                            Second step
+                          </div>
+                          <h6 class="media-tab-title text-nowrap mb-0" style="font-size: 15px;">
+                            Processing order
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item">
+                    <div class="nav-link active" >
+                      <div class="d-flex align-items-center">
+                        <div class="media-tab-media" *ngIf="item.orderStatus === 'Quality Check'"><i class="ci-star"></i></div>
+                        <div class="ps-3">
+                          <div class="media-tab-subtitle text-muted fs-xs mb-1"style="font-weight: bolder;">
+                            Third step
+                          </div>
+                          <h6 class="media-tab-title text-nowrap mb-0" style="font-size: 15px;">
+                            Quality check
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <li class="nav-item" >
+                    <div class="nav-link active" >
+                      <div class="d-flex align-items-center">
+                        <div class="media-tab-media" *ngIf="item.orderStatus === 'Delivered'">
+                          <i class="ci-package"></i>
+                        </div>
+                        <div class="ps-3">
+                          <div class="media-tab-subtitle text-muted fs-xs mb-1"style="font-weight: bolder;">
+                            Fourth step
+                          </div>
+                          <h6 class="media-tab-title text-nowrap mb-0"style="font-size: 15px;">
+                            Product dispatched
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+        <div class="card-footer">
+          <div class="d-sm-flex flex-wrap justify-content-between align-items-center text-center pt-4">
+            <a class="btn btn-primary btn-sm mt-2" href="#order-details" data-bs-toggle="modal">
+              View Order Details
+            </a>
+          </div>
+        </div>
+      </div>
+      
+    </main>
+
+

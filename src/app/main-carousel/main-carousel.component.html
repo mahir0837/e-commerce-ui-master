@@ -1,0 +1,102 @@
+
+<div *ngIf="images && images.length > 0" class="carousel-container">
+  <div *ngFor="let image of images; let i = index">
+   
+    <img
+      
+      [src]="image.imageSrc"
+      [alt]="image.imageAlt"
+      [ngClass]="{ 'image-active': selectedIndex === i }"
+      class="fade"
+     
+    >
+    <div class="description" [ngClass]="{ active: selectedIndex === i }">
+      <h1 class="description-item">{{image.paragraphDescription}}</h1>
+      <h2 class="description-item">{{image.subDescription}}</h2>
+      <h2 class="description-item">{{image.adv}}</h2>
+    </div>
+    <div *ngIf="indicators" class="carousel-dot-container">
+     
+      <span
+        *ngFor="let dot of images; let i = index"
+        class="dot"
+        [ngClass]="{ active: selectedIndex === i }"
+        (click)="selectImage(i)"
+        
+      >
+    
+      </span>
+    </div>
+    <button *ngIf="controls" class="btn-carousel btn-prev" (click)="onPrevClick()">
+      <i class="fas fa-arrow-circle-left icon-carousel icon-prev"></i>
+    </button>
+    <button *ngIf="controls" class="btn-carousel btn-next" (click)="onNextClick()">
+      <i class="fas fa-arrow-circle-right icon-carousel icon-next"></i>
+    </button>
+  </div>
+  </div>
+
+  
+  <!-- <div class="tns-outer" id="tns2-ow"><div class="tns-controls" aria-label="Carousel Navigation" tabindex="0" style=""><button type="button" data-controls="prev" tabindex="-1" aria-controls="tns2"><i class="ci-arrow-left"></i></button><button type="button" data-controls="next" tabindex="-1" aria-controls="tns2"><i class="ci-arrow-right"></i></button></div><div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span class="current">3</span>  of 3</div><div class="tns-inner" id="tns2-iw"><div class="tns-carousel-inner tns-slider tns-gallery tns-subpixel tns-calc tns-horizontal" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;responsive&quot;: {&quot;0&quot;:{&quot;nav&quot;:true, &quot;controls&quot;: false},&quot;992&quot;:{&quot;nav&quot;:false, &quot;controls&quot;: true}}}" id="tns2"> -->
+    <!-- Item-->
+    <!-- <button *ngIf="controls" class="btn-carousel btn-prev" (click)="onPrevClick()">
+      <i class="fas fa-arrow-circle-left icon-carousel icon-prev"></i>
+    </button>
+    <button *ngIf="controls" class="btn-carousel btn-next" (click)="onNextClick()">
+      <i class="fas fa-arrow-circle-right icon-carousel icon-next"></i>
+    </button>
+    <div class="px-lg-5 tns-item tns-normal" style="background-color: rgb(58, 175, 210);" id="tns2-item0" aria-hidden="true" tabindex="-1">
+      <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="/assets/img/Data/01.jpg" alt="Summer Collection">
+        <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
+          <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
+            <h3 class="h2 text-light fw-light pb-1 from-start">Has just arrived!</h3>
+            <h2 class="text-light display-5 from-start delay-1">Huge Summer Collection</h2>
+            <p class="fs-lg text-light pb-3 from-start delay-2">Swimwear, Tops, Shorts, Sunglasses &amp; much more...</p>
+            <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary" href="shop-grid-ls.html">Shop Now<i class="ci-arrow-right ms-2 me-n1"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Item-->
+    <!-- <div class="px-lg-5 tns-item tns-normal" style="background-color: #f5b1b0;" id="tns2-item1" aria-hidden="true" tabindex="-1">
+      <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="/assets/img/Data/02.jpg" alt="Women Sportswear">
+        <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
+          <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
+            <h3 class="h2 text-light fw-light pb-1 from-bottom">Hurry up! Limited time offer.</h3>
+            <h2 class="text-light display-5 from-bottom delay-1">Women Sportswear Sale</h2>
+            <p class="fs-lg text-light pb-3 from-bottom delay-2">Sneakers, Keds, Sweatshirts, Hoodies &amp; much more...</p>
+            <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary" href="shop-grid-ls.html">Shop Now<i class="ci-arrow-right ms-2 me-n1"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Item-->
+    <!-- <div class="px-lg-5 tns-item tns-slide-active tns-fadeIn" style="background-color: rgb(235, 161, 112); left: 0%;" id="tns2-item2">
+      <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="/assets/img/Data/03.jpg" alt="Men Accessories">
+        <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
+          <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
+            <h3 class="h2 text-light fw-light pb-1 from-top">Complete your look with</h3>
+            <h2 class="text-light display-5 from-top delay-1">New Men's Accessories</h2>
+            <p class="fs-lg text-light pb-3 from-top delay-2">Hats &amp; Caps, Sunglasses, Bags &amp; much more...</p>
+            <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary" href="shop-grid-ls.html">Shop Now<i class="ci-arrow-right ms-2 me-n1"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="px-lg-5 tns-item tns-normal tns-slide-cloned" style="background-color: #3aafd2;" aria-hidden="true" tabindex="-1">
+      <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="/assets/img/Data/04.jpg" alt="Summer Collection">
+        <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
+          <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
+            <h3 class="h2 text-light fw-light pb-1 from-start">Has just arrived!</h3>
+            <h2 class="text-light display-5 from-start delay-1">Huge Summer Collection</h2>
+            <p class="fs-lg text-light pb-3 from-start delay-2">Swimwear, Tops, Shorts, Sunglasses &amp; much more...</p>
+            <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary" href="shop-grid-ls.html">Shop Now<i class="ci-arrow-right ms-2 me-n1"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div></div></div><div class="tns-nav" aria-label="Carousel Pagination" style="display: none;"><button type="button" data-nav="0" aria-controls="tns2" style="" aria-label="Carousel Page 1 (Current Slide)" class="tns-nav-active"></button><button type="button" data-nav="1" tabindex="-1" aria-controls="tns2" style="" aria-label="Carousel Page 2"></button><button type="button" data-nav="2" tabindex="-1" aria-controls="tns2" style="" aria-label="Carousel Page 3"></button></div></div>
+
+   -->
+  
+  
+

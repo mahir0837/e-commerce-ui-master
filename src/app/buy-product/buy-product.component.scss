@@ -1,0 +1,42 @@
+.credit-card-logo {
+    width: 60px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 10px; /* Add spacing between logos */
+  }
+  .colorful-card {
+    background-color: #ff6f61; /* Vivid orange background color for the card */
+    border: 2px solid #ff6f61; /* Orange border color for the card */
+  }
+  
+  .colorful-label {
+    color: #ff6f61; /* Orange text color for the labels */
+  }
+  
+  .colorful-card-element {
+    border: 2px solid; /* Orange border for the card input area */
+    padding: 1rem;
+  }
+  
+  .colorful-text {
+    color: #ff6f61; /* Orange text color for error messages */
+  }
+  
+  .colorful-input {
+    background-color: #ff6f61; /* Vivid orange background color for input fields */
+    color: #fff; /* White text color for input fields */
+    border: 2px solid #ff6f61; /* Orange border color for input fields */
+  }
+  
+  .colorful-button {
+    background-color: #ff6f61; /* Vivid orange background color for the button */
+    color: #fff; /* White text color for the button */
+    border: none; /* Remove button border */
+    transition: background-color 0.3s; /* Add a smooth color transition on hover */
+  }
+  
+  .colorful-button:hover {
+    background-color: #ff5733; /* Brighter orange on hover for the button */
+  }
+  #zip-button {
+    display: none;
+  }

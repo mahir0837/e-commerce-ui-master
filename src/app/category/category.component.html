@@ -1,0 +1,56 @@
+<div class="container mt-5">
+  <div class="card p-2" style="background-color: skyblue">
+    <div class="row align-items-start"> <!-- Add the 'align-items-start' class here -->
+      <div class="col-md-6">
+        <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+          <!-- Title-->
+          <div class="d-sm-flex flex-wrap justify-content-between align-items-center pb-2">
+            <h2 class="h3 py-2 me-2 text-center text-sm-start">
+              Add New Category
+            </h2>
+          </div>
+          <form #categoryForm="ngForm" (ngSubmit)="addCategory(categoryForm)">
+            <div class="mb-3 pb-2">
+              <label class="form-label" for="unp-product-name">Category name</label>
+              <input class="form-control" type="text" id="unp-product-name" [(ngModel)]="category.categoryName" name="categoryName" />
+              <div class="form-text">Maximum 100 characters. No HTML or emoji allowed.</div>
+            </div>
+            <button class="btn btn-primary d-block w-100" type="submit">
+              <i class="ci-cloud-upload fs-lg me-2"></i>Upload Category
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h2 class="h3 py-2 me-2 text-center text-sm-start">Category Name</h2>
+        <table mat-table [dataSource]="categoryArr" class="mat-elevation-z8">
+          <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+          <ng-container matColumnDef="Category Name">
+            <th mat-header-cell *matHeaderCellDef>Category Form</th>
+            <td mat-cell *matCellDef="let element">{{ element.categoryName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" (click)="openPopUp()">
+              
+              <mat-icon>edit</mat-icon>
+            </button>
+          
+            <button mat-icon-button color="warn" (click)="deleteProduct(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button> 
+          </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+&nbsp;&nbsp;&nbsp;

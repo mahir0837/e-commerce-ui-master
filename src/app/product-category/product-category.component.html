@@ -1,0 +1,124 @@
+<div class="container mt-5">
+  <!-- Grid-->
+  <div class="row pt-2 mx-n2">
+    <div class="row pt-2 mx-n2">
+      <div
+        class="col-12 col-md-3 d-md-flex justify-content-end align-items-center mb-4"
+      >
+        <label
+          class="form-label mb-md-0 me-md-2 pe-md-1 fs-sm fw-normal text-nowrap"
+          for="sorting"
+          >Sort by:</label
+        >
+        <select class="form-select" id="sorting" style="min-width: 222px" [(ngModel)]="selectedSortValue" (ngModelChange)="onSelectedSortValue($event)">
+          <option value="1">Low - High Price</option>
+          <option value="2">High - Low Price</option>
+          <option value="3">A - Z Order</option>
+          <option value="4">Z - A Order</option>
+        </select>
+      </div>
+      <div
+        class="col-12 col-md-3 d-md-flex justify-content-end align-items-center mb-4"
+      >
+        <label
+          class="form-label mb-md-0 me-md-2 pe-md-1 fs-sm fw-normal text-nowrap"
+          for="sorting"
+          >Brand:</label
+        >
+        <div>
+          <select
+            class="form-select"
+            id="sorting"
+            style="min-width: 222px"
+            [(ngModel)]="productBrandId"
+            (ngModelChange)="onCategorySelected($event)"
+          >
+            <option [value]="0">Select Brand</option>
+            <option *ngFor="let item of brandArr" [value]="item.id">
+              {{ item.brandName }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product-->
+    <div
+      class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4"
+      *ngFor="let product of productDetails"
+    >
+      <div class="card product-card">
+        <div class="product-card-actions d-flex align-items-center">
+          <a class="btn-action nav-link-style me-2" href="#"
+            ><i class="ci-compare me-1"></i>Compare</a
+          >
+          <button
+            class="btn-wishlist btn-sm"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            aria-label="Add to wishlist"
+            data-bs-original-title="Add to wishlist"
+          >
+            <i class="ci-heart" (click)="addToWishList(product.productId)"></i>
+          </button>
+        </div>
+        <a
+          class="card-img-top d-block overflow-hidden"
+          href="shop-single-v2.html"
+          ><img [src]="product.productImages[0].url" alt="Product"
+        /></a>
+        <div class="card-body py-2">
+          <a class="product-meta d-block fs-xs pb-1" href="#">{{
+            product.productName
+          }}</a>
+          <h3 class="product-title fs-sm">
+            <a href="shop-single-v2.html"></a>
+          </h3>
+          <div class="d-flex justify-content-between">
+            <div class="product-price">
+              <span class="text-accent"
+                >${{ product.productDiscountedPrice }}.<small>00</small></span
+              >
+            </div>
+            <div class="star-rating">
+              <i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-body card-body-hidden">
+          <button
+            class="btn btn-primary btn-sm d-block w-100 mb-2"
+            type="button"
+            (click)="addToCart(product.productId)"
+          >
+            <i class="ci-cart fs-sm me-1"></i>Add to Cart
+          </button>
+          <div class="text-center">
+            <a
+              class="nav-link-style fs-ms"
+              (click)="showProductDetails(product.productId)"
+              data-bs-toggle="modal"
+              ><i class="ci-eye align-middle me-1"></i>Quick view</a
+            >
+          </div>
+        </div>
+      </div>
+      <hr class="d-sm-none" />
+    </div>
+    <div class="text-center mt-5" style="padding-bottom: 100px">
+      <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        (click)="loadMoreProduct()"
+      >
+        Load More
+      </button>
+    </div>
+  </div>
+</div>

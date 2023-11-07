@@ -1,0 +1,613 @@
+<!-- <mat-toolbar color="primary">
+    <span>
+        E-Commerce Application
+    </span>
+    <span class="space-buttons"></span>
+    <button *ngIf="!isLoggedIn()" mat-raised-button color="primary" routerLink="/login">
+        Login
+    </button>
+    <button *ngIf="isLoggedIn()" mat-raised-button color="warn" (click)="logOut()">
+        Logout
+    </button>
+</mat-toolbar>
+<mat-toolbar color="primary" *ngIf="isLoggedIn()">
+    <button mat-raised-button color="primary" routerLink="/">Home</button>
+    <button *ngIf="!isAdmin()" mat-raised-button color="primary" routerLink="/cart">Cart</button>
+    <button *ngIf="!isAdmin()" mat-raised-button color="primary" routerLink="/myOrders">My Orders</button>
+    <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/orderInformation">Order Information</button>
+    <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/addNewProduct">Add New Product</button>
+    <button  *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/showProductDetails">Show Product Details</button>
+    <div  align="right">
+        <i class="bi bi-cart3"></i>
+    </div>
+</mat-toolbar> -->
+
+<!-- Topbar-->
+<div class="topbar topbar-dark bg-dark">
+  <div class="container">
+    <div>
+      <div
+        class="topbar-text text-nowrap d-none d-md-inline-block border-start border-light ps-3 ms-3"
+      >
+        <span class="text-muted me-1">Available 24/7 at </span
+        ><a
+          class="topbar-link d-md-inline-block border-start border-light ps-3 ms-3"
+          href="tel:4169703218"
+          >(+1) 416 970 3218</a
+        >
+      </div>
+    </div>
+    <div class="topbar-text dropdown d-md-none ms-auto">
+      <a class="topbar-link dropdown-toggle" data-bs-toggle="dropdown"
+        >Wishlist / Compare / Track</a
+      >
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <a class="dropdown-item"
+            ><i class="ci-heart text-muted me-2"></i>Wishlist (3)</a
+          >
+        </li>
+        <li>
+          <a class="dropdown-item" href="comparison.html"
+            ><i class="ci-compare text-muted me-2"></i>Compare (3)</a
+          >
+        </li>
+        <li>
+          <a class="dropdown-item" routerLink="/myOrders"
+            ><i class="ci-location text-muted me-2"></i>Order tracking</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="d-none d-md-block ms-3 text-nowrap">
+      <a class="topbar-link d-none d-md-inline-block" routerLink="wishList"
+        ><i class="ci-heart mt-n1"></i>Wishlist ({{ wishListNumber }})</a
+      ><a
+        class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
+        href="comparison.html"
+        ><i class="ci-compare mt-n1"></i>Compare (3)</a
+      ><a
+        class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
+        href="order-tracking.html"
+        ><i class="ci-location mt-n1"></i>Order tracking</a
+      >
+    </div>
+  </div>
+</div>
+<!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+<div class="navbar-sticky bg-light">
+  <div class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a
+        class="navbar-brand d-none d-sm-block me-3 flex-shrink-0"
+        href="index.html"
+        ><img src="/assets/img/Logo1.png" width="70"
+      /></a>
+      <!-- Search-->
+      <div class="input-group d-none d-lg-flex flex-nowrap mx-4">
+        <i
+          class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"
+        >
+        </i>
+        <input
+          [ngModel]="searchTerm"
+          (keyup)="searchByKeyword($event)"
+          name="searchKey"
+          id="searchKey"
+          class="form-control rounded-start w-100"
+          type="text"
+          placeholder="Search for products"
+        />
+        <select
+          class="form-select flex-shrink-0"
+          style="width: 10.5rem"
+          [(ngModel)]="categoryId"
+          routerLink="/productCategory"
+          (ngModelChange)="onCategorySelected($event)"
+        >
+          <option value="0">All Categories</option>
+          <option *ngFor="let item of categoryList" [value]="item.id">
+            {{ item.categoryName }}
+          </option>
+        </select>
+      </div>
+      <!-- Toolbar -->
+      <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span></button
+        ><a class="navbar-tool navbar-stuck-toggler" href="#"
+          ><span class="navbar-tool-tooltip">Toggle menu</span>
+          <div class="navbar-tool-icon-box">
+            <i class="navbar-tool-icon ci-menu"></i></div
+        ></a>
+
+      
+        <a
+          class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2"
+          href="#signin-modal"
+          data-bs-toggle="modal"
+        >
+          <div class="navbar-tool-icon-box">
+            <i class="navbar-tool-icon ci-user"></i>
+          </div>
+          <div class="navbar-tool-text ms-n3">
+            <small>Hello, Sign in</small>My Account
+          </div></a
+        >
+        <div
+          class="modal fade"
+          id="signin-modal"
+          tabindex="-1"
+          style="display: none"
+          aria-hidden="true"
+          #signinModal
+         
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-secondary">
+                <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a
+                      class="nav-link fw-medium active"
+                      href="#signin-tab"
+                      data-bs-toggle="tab"
+                      role="tab"
+                      aria-selected="true"
+                      ><i class="ci-unlocked me-2 mt-n1"></i>Sign in</a
+                    >
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a
+                      class="nav-link fw-medium"
+                      href="#signup-tab"
+                      data-bs-toggle="tab"
+                      role="tab"
+                      aria-selected="false"
+                      tabindex="-1"
+                      ><i class="ci-user me-2 mt-n1"></i>Sign up</a
+                    >
+                  </li>
+                </ul>
+                <button
+                  class="btn-close"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body tab-content py-4">
+                <form
+                  [formGroup]="signInForm"
+                  class="needs-validation tab-pane fade show active"
+                  autocomplete="off"
+                  novalidate=""
+                  id="signin-tab"
+                 
+                  role="tabpanel"
+                >
+                  <div class="mb-3" >
+                  
+                    <label class="form-label" for="si-email"
+                      >Email address</label
+                    >
+                    <input
+                      class="form-control"
+                      type="email"
+                      name="userName"
+                      formControlName="userName"
+                      id="userName"
+                      placeholder="johndoe@example.com"
+                      required
+                    />
+                  </div>
+                    <div *ngIf="signInForm.controls['userName'].dirty && signInForm.hasError('required','userName')" class="text-danger">
+                      *Please provide a valid email address.
+                    </div>
+              
+                  <div class="mb-3">
+                    <label class="form-label" for="si-password">Password</label>
+                    <div class="password-toggle">
+                      <input
+                        class="form-control"
+                        type="password"
+                        name="userPassword"
+                        formControlName="userPassword"
+                         id="userPassword"
+                        required
+                      />
+                      <div *ngIf="signInForm.controls['userPassword'].dirty&&signInForm.hasError('required','userPassword')" class="text-danger">
+                        *Please provide a valid Password.
+                      </div>
+                      <label
+                        class="password-toggle-btn"
+                        aria-label="Show/hide password"
+                      >
+                        <input
+                          class="password-toggle-check"
+                          type="checkbox"
+                        /><span class="password-toggle-indicator"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-3 d-flex flex-wrap justify-content-between">
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="si-remember"
+                      />
+                      <label class="form-check-label" for="si-remember"
+                        >Remember me</label
+                      >
+                    </div>
+                    <a class="fs-sm" href="#">Forgot password?</a>
+                  </div>
+                  <button
+                  (click)="login()"
+                    class="btn btn-primary btn-shadow d-block w-100"
+                    type="submit"
+                  >
+                    Sign in
+                  </button>
+                </form>
+                <form
+                [formGroup]="signUpForm"
+                  class="needs-validation tab-pane fade"
+                  autocomplete="off"
+                  novalidate=""
+                  id="signup-tab"
+                  role="tabpanel"
+             
+                >
+                  <div class="mb-3">
+                    <label class="form-label" for="su-name">First Name</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="su-name"
+                      placeholder="John Doe"
+                      required
+                      formControlName="userFirstName"
+                      id="userFirstName"
+                    />
+                    
+                    <div *ngIf="signUpForm.controls['userFirstName'].dirty && signUpForm.hasError('required','userFirstName')" class="text-danger">
+                      *Please fill in your first name.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="su-name">Last Name</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="su-name"
+                      placeholder="John Doe"
+                      required
+                      formControlName="userLastName" id="userLastName"
+                    />
+                    
+                    <div *ngIf="signUpForm.controls['userLastName'].dirty&&signUpForm.hasError('required','userLastName')" class="text-danger">
+                      *Please fill in your last name.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="su-email">Email address</label>
+                    <input
+                      class="form-control"
+                      type="email"
+                      id="su-email"
+                      placeholder="johndoe@example.com"
+                      required
+                      formControlName="userName" id="userName" placeholder="Enter your User Name"
+                    />
+                    <div *ngIf="signUpForm.controls['userName'].dirty&&signUpForm.hasError('required','userName')" class="text-danger">
+                      *Please fill in valid email address.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="su-password">Password</label>
+                    <div class="password-toggle">
+                      <input
+                        class="form-control"
+                        type="password"
+                        id="su-password"
+                        required
+                        formControlName="userPassword" id="userPassword"
+                      />
+                      <label
+                        class="password-toggle-btn"
+                        aria-label="Show/hide password"
+                      >
+                        <input
+                          class="password-toggle-check"
+                          type="checkbox"
+                        /><span class="password-toggle-indicator"></span>
+                      </label>
+                    </div>
+                    <div *ngIf="signUpForm.controls['userPassword'].dirty&&signUpForm.hasError('required','userPassword')" class="text-danger">
+                      *Please fill in valid password.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="su-password-confirm"
+                      >Confirm password</label
+                    >
+                    <div class="password-toggle">
+                      <input
+                        class="form-control"
+                        type="password"
+                        id="su-password-confirm"
+                        required=""
+                      />
+                      <label
+                        class="password-toggle-btn"
+                        aria-label="Show/hide password"
+                      >
+                        <input
+                          class="password-toggle-check"
+                          type="checkbox"
+                        /><span class="password-toggle-indicator"></span>
+                      </label>
+                    </div>
+                    <div *ngIf="signUpForm.controls['userConfirmPassword'].dirty&&signUpForm.hasError('required','userConfirmPassword')" class="text-danger">
+                      *Password should be match
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-primary btn-shadow d-block w-100"
+                    type="submit"
+                    (click)="register()"
+                  >
+                    Sign up
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+        <div class="navbar-tool dropdown ms-3" >
+          <a 
+            class="navbar-tool-icon-box bg-secondary dropdown-toggle"
+            routerLink="/cart"
+            ><span class="navbar-tool-label">{{ totalItem }}</span
+            ><i class="navbar-tool-icon ci-cart"></i></a
+          ><a class="navbar-tool-text" href="/cart"
+            ><small>My Cart</small>${{ totalAmount }}</a
+          >
+          <!-- Cart dropdown-->
+          <div class="dropdown-menu dropdown-menu-end">
+            <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem">
+              <div
+                style="height: 15rem"
+                data-simplebar="init"
+                data-simplebar-auto-hide="false"
+              >
+                <div
+                  class="simplebar-wrapper"
+                  style="margin: 0px -16px 0px 0px"
+                >
+                  <div class="simplebar-height-auto-observer-wrapper">
+                    <div class="simplebar-height-auto-observer"></div>
+                  </div>
+                  <div class="simplebar-mask">
+                    <div
+                      class="simplebar-offset"
+                      style="right: 0px; bottom: 0px"
+                    >
+                      <div
+                        class="simplebar-content-wrapper"
+                        tabindex="0"
+                        role="region"
+                        aria-label="scrollable content"
+                        style="height: auto; overflow: hidden"
+                      >
+                        <div
+                          class="simplebar-content"
+                          style="padding: 0px 16px 0px 0px"
+                        >
+                          <div
+                            class="widget-cart-item pb-2 border-bottom"
+                            *ngFor="let item of cart"
+                          >
+                            <button
+                              class="btn-close text-danger"
+                              type="button"
+                              aria-label="Remove"
+                            >
+                              <span
+                                aria-hidden="true"
+                                (click)="removeItem(item.cartId)"
+                                >×</span
+                              >
+                            </button>
+                            <div class="d-flex align-items-center">
+                              <a
+                                class="flex-shrink-0"
+                                href="shop-single-v1.html"
+                                ><img
+                                  [src]="item.product.productImages[0].url"
+                                  width="64"
+                                  alt="Product"
+                              /></a>
+                              <div class="ps-2">
+                                <h6 class="widget-product-title">
+                                  <a
+                                    href="/productViewDetails;productId={{
+                                      item.product.productId
+                                    }}"
+                                    >{{ item.product.productName }}</a
+                                  >
+                                </h6>
+                                <div class="widget-product-meta">
+                                  <span class="text-accent me-2"
+                                    >${{
+                                      item.product.productDiscountedPrice
+                                    }}.<small>00</small></span
+                                  ><span class="text-muted">x 1</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="simplebar-placeholder"
+                    style="width: 0px; height: 0px"
+                  ></div>
+                </div>
+                <div
+                  class="simplebar-track simplebar-horizontal"
+                  style="visibility: hidden"
+                >
+                  <div
+                    class="simplebar-scrollbar simplebar-visible"
+                    style="width: 0px; display: none"
+                  ></div>
+                </div>
+                <div
+                  class="simplebar-track simplebar-vertical"
+                  style="visibility: hidden"
+                >
+                  <div
+                    class="simplebar-scrollbar simplebar-visible"
+                    style="height: 0px; display: none"
+                  ></div>
+                </div>
+              </div>
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center py-3"
+              >
+                <div class="fs-sm me-2 py-2">
+                  <span class="text-muted">Subtotal:</span
+                  ><span class="text-accent fs-base ms-1"
+                    >${{ totalAmount }}..<small>00</small></span
+                  >
+                </div>
+                <a
+                  class="btn btn-outline-secondary btn-sm"
+                  href="shop-cart.html"
+                  >Expand cart<i class="ci-arrow-right ms-1 me-n1"></i
+                ></a>
+              </div>
+              <a
+                class="btn btn-primary btn-sm d-block w-100"
+                href="checkout-details.html"
+                ><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2"
+  >
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <!-- Search-->
+        <div class="input-group d-lg-none my-3">
+          <i
+            class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"
+          ></i>
+          <input
+            class="form-control rounded-start"
+            type="text"
+            placeholder="Search for products"
+          />
+        </div>
+
+        <!-- Primary menu-->
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item" *ngIf="!isAdmin()">
+            <a class="nav-link" routerLink="/cart">Cart</a>
+          </li>
+
+          <li class="nav-item dropdown" *ngIf="isAdmin()">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              data-bs-toggle="dropdown"
+              >Add</a
+            >
+            <div class="dropdown-menu p-0">
+              <div class="d-flex flex-wrap flex-sm-nowrap px-2">
+                <div
+                  class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3"
+                >
+                  <div class="widget widget-links mb-4">
+                    <ul class="widget-list">
+                      <li class="widget-list-item">
+                        <a
+                          class="widget-list-link"
+                          href="shop-grid-ls.html"
+                          routerLink="/addNewProduct"
+                          >Add New Product</a
+                        >
+                      </li>
+                      <li class="widget-list-item">
+                        <a
+                          class="widget-list-link"
+                          href="shop-grid-rs.html"
+                          routerLink="/category"
+                          >Add New Category</a
+                        >
+                      </li>
+                      <li class="widget-list-item">
+                        <a
+                          class="widget-list-link"
+                          href="shop-grid-rs.html"
+                          routerLink="/brand"
+                          >Add New Brand</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              data-bs-toggle="dropdown"
+              data-bs-auto-close="outside"
+              >Order-Page</a
+            >
+            <ul class="dropdown-menu">
+              <li class="dropdown-divider"></li>
+              <li *ngIf="!isAdmin()">
+                <a class="dropdown-item" routerLink="myOrders">My-Orders</a>
+              </li>
+              <li *ngIf="isAdmin()">
+                <a class="dropdown-item" routerLink="orderInformation"
+                  >Order Information</a
+                >
+              </li>
+              <li class="dropdown-divider"></li>
+            </ul>
+          </li>
+          <li class="nav-item" *ngIf="isAdmin()">
+            <a class="nav-link" routerLink="showProductDetails"
+              >Show-Product-Details</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

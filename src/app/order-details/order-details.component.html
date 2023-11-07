@@ -1,0 +1,113 @@
+<div class="container mt-5">
+  <mat-button-toggle-group aria-label="Font Style">
+    <mat-button-toggle value="All" (click)="getAllOrderDetailsForAdmin('All')"
+      >All</mat-button-toggle
+    >
+    <mat-button-toggle
+      value="Placed"
+      (click)="getAllOrderDetailsForAdmin('Placed')"
+      >Placed</mat-button-toggle
+    >
+    <mat-button-toggle
+      value="Delivered"
+      (click)="getAllOrderDetailsForAdmin('Processing')"
+      >Processing</mat-button-toggle
+    >
+    <mat-button-toggle
+      value="Delivered"
+      (click)="getAllOrderDetailsForAdmin('Quality Check')"
+      >Quality Check</mat-button-toggle
+    >
+    <mat-button-toggle
+      value="Delivered"
+      (click)="getAllOrderDetailsForAdmin('Delivered')"
+      >Delivered</mat-button-toggle
+    >
+  </mat-button-toggle-group>
+  <div class="card">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-3">
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.orderId }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Product Name">
+        <th mat-header-cell *matHeaderCellDef>Product Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.orderFullName }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.orderFullName }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.orderFullAddress }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Contact No">
+        <th mat-header-cell *matHeaderCellDef>Contact No</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.orderContactNumber }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.orderStatus }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="markAsProcessing(element.orderId,element.addedDays)"
+            [disabled]="element.orderStatus !== 'Placed'"
+          >
+            Processing
+          </button>
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="markAsQualityCheck(element.orderId,element.addedDays)"
+            [disabled]="element.orderStatus !== 'Processing'"
+          >
+            QualityCheck
+          </button>
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="markAsDelivered(element.orderId, element.addedDays)"
+            [disabled]="element.orderStatus !== 'Quality Check'"
+          >
+            Delivered
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Add Days">
+        <th mat-header-cell *matHeaderCellDef>Add Days</th>
+        <td mat-cell *matCellDef="let element" class="add-days-cell">
+          <input
+            type="text"
+            [(ngModel)]="element.addedDays"
+            class="add-days-input"
+            value="0"
+          />
+          <button (click)="increment(element)" class="add-days-button">
+            +
+          </button>
+          <button (click)="decrement(element)" class="add-days-button">
+            -
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+&nbsp;&nbsp;

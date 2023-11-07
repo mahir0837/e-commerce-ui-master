@@ -1,0 +1,135 @@
+<!-- <div class="container mt-5">
+
+   <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Search any product</mat-label>
+      <input matInput #serachkeyword
+      (keyup)="searchByKeyword(serachkeyword.value)"
+       name="searchKey" id="searchKey" placeholder="Search any product">
+   </mat-form-field>
+
+   <mat-grid-list cols="4" rowHeight="3:5" gutterSize="10">
+      <mat-grid-tile *ngFor="let p of productDetails">
+         <div class="row col-md-12">
+            <div class="image-container">
+               <img class="home-page-product-image" [src]="p.productImages[0].url">
+            </div>
+
+            <div class="mt-3">
+               <p><b>{{p.productName}}</b></p>
+            </div>
+            <div class="mt-2">
+               <p style="white-space: inherit;height: 40px;width: 288px; overflow: hidden;">
+                  {{p.productDescription}}
+               </p>
+            </div>
+            <div class="mt-2">
+               <b>
+                  ${{p.productDiscountedPrice}}
+               </b>
+               &nbsp;
+               <b style="text-decoration: line-through; color: tomato;">
+                  ${{p.productActualPrice}}
+               </b>
+
+               <div class="mt-2">
+                  <button mat-raised-button color="warn" (click)="showProductDetails(p.productId)">View Details</button>
+               </div>
+            </div>
+         </div>
+      </mat-grid-tile>
+   </mat-grid-list>
+   <div class="text-center mt-5" style="padding-bottom: 100px;" >
+      <button type="button" mat-raised-button color="primary" (click)="loadMoreProduct()">Load More</button>
+   </div>
+</div> -->
+
+<!-- Heading-->
+
+<div class="container mt-5">
+  <div>
+    <app-main-carousel [images]="images" [autoSlide]="true"></app-main-carousel>
+  </div>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <!-- Grid-->
+  <div class="row pt-2 mx-n2">
+    <!-- Product-->
+    <div
+      class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4"
+      *ngFor="let product of productDetails"
+    >
+      <div class="card product-card">
+        <div class="product-card-actions d-flex align-items-center">
+          <a class="btn-action nav-link-style me-2" href="#"
+            ><i class="ci-compare me-1"></i>Compare</a
+          >
+          <button
+            class="btn-wishlist btn-sm"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            aria-label="Add to wishlist"
+            data-bs-original-title="Add to wishlist"
+          >
+            <i class="ci-heart" 
+            (click)="addToWishList(product.productId)"></i>
+          </button>
+        </div>
+        <a
+          class="card-img-top d-block overflow-hidden"
+          href="shop-single-v2.html"
+          ><img [src]="product.productImages[0].url" alt="Product"
+        /></a>
+        <div class="card-body py-2">
+          <a class="product-meta d-block fs-xs pb-1" href="#">{{
+            product.productName
+          }}</a>
+          <h3 class="product-title fs-sm">
+            <a href="shop-single-v2.html"></a>
+          </h3>
+          <div class="d-flex justify-content-between">
+            <div class="product-price">
+              <span class="text-accent"
+                >${{ product.productDiscountedPrice }}.<small>00</small></span
+              >
+            </div>
+            <div class="star-rating">
+              <i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i
+              ><i class="star-rating-icon ci-star-filled active"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-body card-body-hidden">
+          <button
+            class="btn btn-primary btn-sm d-block w-100 mb-2"
+            type="button"
+            (click)="addToCart(product.productId)"
+          >
+            <i class="ci-cart fs-sm me-1"></i>Add to Cart
+          </button>
+          <div class="text-center">
+            <a
+              class="nav-link-style fs-ms"
+              (click)="showProductDetails(product.productId)"
+              data-bs-toggle="modal"
+              ><i class="ci-eye align-middle me-1"></i>Quick view</a
+            >
+          </div>
+        </div>
+      </div>
+      <hr class="d-sm-none" />
+    </div>
+    <div class="text-center mt-5" style="padding-bottom: 100px">
+      <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        (click)="loadMoreProduct()"
+      >
+        Load More
+      </button>
+    </div>
+  </div>
+</div>
