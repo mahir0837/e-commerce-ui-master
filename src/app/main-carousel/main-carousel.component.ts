@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CarouselImage } from 'src/assets/img/Data/carousel';
 
+
 @Component({
   selector: 'app-main-carousel',
   templateUrl: './main-carousel.component.html',

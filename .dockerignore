@@ -1,0 +1,11 @@
+**/node_modules/
+**/.git
+**/readme.md
+**/LICENSE
+**/.vscode
+**/npm-debug.log
+**/coverage
+**/.env
+**/.editconfig
+**/.aws
+**/dist

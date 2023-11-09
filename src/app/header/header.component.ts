@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
       userLastName: ['', [Validators.required, Validators.minLength(3)]],
       userName: ['', [Validators.required, Validators.email]],
       userPassword: ['', [Validators.required, Validators.minLength(6)]],
-      userConfirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    
     });
     this.productService.refresh.subscribe((resp) => {
       this.getCartDetails();
