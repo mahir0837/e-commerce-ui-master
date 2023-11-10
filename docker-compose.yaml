@@ -1,0 +1,16 @@
+version: "3.9" 
+
+services:
+  ecommercefrontendapp:
+    container_name: ecommercefrontendappcontainer
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    image: ecommercefrontend:v1
+    ports:
+      - "4200:80"
+    networks:
+      - internalnet 
+networks:
+  internalnet:
+    driver: bridge

@@ -9,7 +9,7 @@ import { Category } from '../_model/category-modal';
 import { WishList } from '../_model/wishlist-modal';
 import { Brand } from '../_model/brand-modal';
 import { UserModal } from '../_model/user.modal';
-import { environment } from 'src/environment/environment';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({

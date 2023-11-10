@@ -43,7 +43,8 @@ import { BrandComponent } from './brand/brand.component';
 import { ProductCategoryComponent } from './product-category/product-category.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MainCarouselComponent } from './main-carousel/main-carousel.component';
+import { MainCarouselComponent } from 'src/app/main-carousel/main-carousel.component';
+
 @NgModule({
   declarations: [
     AppComponent,
